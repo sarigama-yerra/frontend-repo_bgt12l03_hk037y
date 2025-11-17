@@ -1,28 +1,46 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import Hero from "./components/Hero";
+import ExperienceGrid from "./components/ExperienceGrid";
+import Footer from "./components/Footer";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
+    <>
+      <Hero />
+      <ExperienceGrid />
+    </>
+  );
 }
 
-export default App
+function Placeholder({ title }) {
+  return (
+    <main className="min-h-[60vh] bg-[#FAF7F0]">
+      <div className="max-w-5xl mx-auto px-6 py-20">
+        <h1 className="font-serif text-4xl text-[#1A4F63]">{title}</h1>
+        <p className="mt-3 text-[#3A2F28]">This page is coming next. We’re crafting an eco‑luxury experience.</p>
+      </div>
+    </main>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-[#FAF7F0] text-[#3A2F28]">
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<Placeholder title="About — The Legend of Tisa’s" />} />
+          <Route path="/experiences" element={<Placeholder title="Experiences" />} />
+          <Route path="/eco-lodge" element={<Placeholder title="Eco‑Lodge" />} />
+          <Route path="/marine-reserve" element={<Placeholder title="Alega Marine Reserve" />} />
+          <Route path="/responsibility" element={<Placeholder title="Responsibility" />} />
+          <Route path="/press" element={<Placeholder title="Press & Reviews" />} />
+          <Route path="/contact" element={<Placeholder title="Contact" />} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
+}
